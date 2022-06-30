@@ -1,0 +1,45 @@
+# external stack. supported tags: stack, vnl, iface
+extstack stack=vdestack,vnl=vde:///tmp/hub
+
+# internal stack. full iothconf syntax
+intstack stack=kernel
+
+# dns (if basename is a fqdn
+dns 80.80.80.80
+
+# fqdn of the otip address
+# name renzo.otip
+name renzo.otipcs.v2.cs.unibo.it
+
+# base adress to compute the current address
+baseaddr 2001:760:2e00:ff00::
+
+# it is possible to define baseaddr as a fdqn
+# (it requires dns access)
+# baseaddr otipcs.v2.cs.unibo.it
+
+# otip password
+passwd mypassword
+
+# udp and tcp proxy configurations:
+#    extport,inthost,intport
+udp	4242,::1,8484
+tcp	4242,::1,8484
+tcp	22,::1,22
+
+# configuration parameters
+# otip address validity period (sec)
+# client and rproxy must agree on the same value
+otip_period 32
+# pre-activation time (sec)
+# in advance activation (to support negative drifts of clients' clocks)
+otip_preactive 8
+# post-activation time (sec)
+# delayed deactivation (to support positive drifts of clients' clocks)
+otip_postactive 8
+# tcp listen argument
+tcp_listen_backlog 5
+# timeout to drop tcp idle connections (sec)
+tcp_timeout 120
+# timeout to drop udp reply map (sec)
+udp_timeout 8
