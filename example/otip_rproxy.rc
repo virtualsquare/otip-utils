@@ -4,15 +4,17 @@ extstack stack=vdestack,vnl=vde:///tmp/hub
 # internal stack. full iothconf syntax
 intstack stack=kernel
 
-# dns (if basename is a fqdn
+# dns (if basename is a fqdn)
 dns 80.80.80.80
 
 # fqdn of the otip address
 # name renzo.otip
-name renzo.otipcs.v2.cs.unibo.it
+# name renzo.otipcs.v2.cs.unibo.it
+name renzo.otip
 
 # base adress to compute the current address
-baseaddr 2001:760:2e00:ff00::
+# baseaddr 2001:760:2e00:ff00::
+baseaddr fc01::
 
 # it is possible to define baseaddr as a fdqn
 # (it requires dns access)

@@ -1,0 +1,17 @@
+## example: define local hash names and forward other request.
+
+rstack    stack=vdestack,vnl=vde:///tmp/hub
+rstack    mac=80:01:01:01:01:01,eth
+rstack    ip=fc01::24/64
+fstack    stack=kernel
+
+dns       8.8.8.8
+dns       80.80.80.80
+
+net       local fc01::/64
+auth      accept local
+
+auth      otip local .otip fc01:: mypassword
+
+auth      cache local .
+auth      fwd local .
