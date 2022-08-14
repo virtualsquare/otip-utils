@@ -43,6 +43,11 @@ target_link_libraries(otipaddr ioth iothdns iothconf iothaddr)
 install(TARGETS otipaddr
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
+add_custom_target(hashaddr ALL
+		COMMAND ${CMAKE_COMMAND} -E create_symlink otipaddr hashaddr)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hashaddr
+    DESTINATION ${CMAKE_INSTALL_BINDIR})
+
 # add_subdirectory(man)
 
 add_custom_target(uninstall

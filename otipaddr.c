@@ -42,20 +42,23 @@ static inline char *strchrnul(const char *s, int c) {
 #endif
 
 /* Main and command line args management */
-void usage(char *progname)
+void usage(char *progname, int isaddr)
 {
-  fprintf(stderr,"Usage: %s OPTIONS name [password]\n"
+  fprintf(stderr,"Usage: %s OPTIONS name %s\n"
       "\tOPTIONS:\n"
       "\t--base|--baseaddr|-b <IPv6 base address or base addr domain name>\n"
-      "\t--dnsstack|-s <ioth_stack_conf>\n"
       "\t--dns|-D <dnsaddr>\n"
-      "\t--period|-T <ioth_period>\n"
+      "\t--dnsstack|-s <ioth_stack_conf>\n"
+			"%s"
       "\t--help|-h\n",
-      progname);
+			progname,
+			isaddr ? "" : "password",
+			isaddr ? "" : "\t--period|-T <otip_period>\n"
+      );
   exit(1);
 }
 
-	static char *short_options = "hdvf:p:e:i:n:b:P:u:t:D:";
+static char *short_options = "hdvf:p:e:i:n:b:P:u:T:D:";
 static struct option long_options[] = {
   {"help", 0, 0, 'h'},
   {"base", 1, 0, 'b'},
@@ -83,6 +86,7 @@ static inline int argindex(char tag) {
 
 int main(int argc, char *argv[]) {
 	char *progname = basename(argv[0]);
+	int isaddr = (strcmp(progname, "hashaddr") == 0);
 	int option_index;
 	char *name = NULL;
 	char *passwd = NULL;
@@ -95,7 +99,7 @@ int main(int argc, char *argv[]) {
 		switch (c) {
 			case -1:
 			case '?':
-			case 'h': usage(progname); break;
+			case 'h': usage(progname, isaddr); break;
 			default: {
 								 int index = argindex(c);
 								 if (args.argv[index] == NULL)
@@ -104,8 +108,8 @@ int main(int argc, char *argv[]) {
 							 break;
 		}
 	}
-	if (argc < optind + 1 || argc > optind + 2)
-		usage(progname);
+	if (isaddr ? argc != optind + 1 : argc != optind + 2)
+		usage(progname, isaddr);
 	name = argv[optind];
 	if (argc > optind + 1)
 		passwd = argv[optind + 1];
