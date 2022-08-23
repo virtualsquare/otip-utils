@@ -14,6 +14,10 @@ password, and the current time.
 * `otip_rproxy`: a OTIP enabled reverse proxy. This tool permit to protect
 TCP or UTP servers using OTIP.
 
+### Acknowledgements
+Thanks to Federico De Marchi who implemented an early prototype of
+OTIP reverse proxy.
+
 ## How to install
 
 `otip-utils`  depends on the following libraries, that must be installed in advance:
