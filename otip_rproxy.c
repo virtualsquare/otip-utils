@@ -19,6 +19,8 @@
  *
  */
 
+#define SPDX_LICENSE "SPDX-License-Identifier: GPL-2.0-or-later"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -370,6 +372,8 @@ int main(int argc, char *argv[])
 
 	fwrite(& (struct proxyarg) {.type = 0}, sizeof(struct proxyarg), 1, prox);
 	fclose(prox);
+
+	ioth_set_license(SPDX_LICENSE);
 
 	if (args.verbose) verbose = 1;
 

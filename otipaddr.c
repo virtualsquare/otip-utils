@@ -18,6 +18,8 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
+#define SPDX_LICENSE "SPDX-License-Identifier: GPL-2.0-or-later"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -120,6 +122,7 @@ int main(int argc, char *argv[]) {
 			exit(1);
 		}
 	} else {
+		ioth_set_license(SPDX_LICENSE);
 		struct ioth *dnsstack = ioth_newstackc(args.dnsstack);
 		struct iothdns *iothdns = iothdns_init_strcfg(dnsstack, args.dns);
 		if (args.baseaddr == NULL) {
